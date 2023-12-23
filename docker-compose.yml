@@ -1,0 +1,14 @@
+version: '3'
+services:
+  backend:
+    image: rayensaaadallah/backend:latest
+    ports:
+      - "8089:8089"
+    depends_on:
+      - database
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: backend
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
