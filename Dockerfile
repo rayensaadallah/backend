@@ -1,4 +1,4 @@
-FROM openjdk:17-jre-slim
+FROM openjdk:11
 WORKDIR /app
 COPY target/backend.jar . 
 EXPOSE 8089
