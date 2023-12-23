@@ -1,0 +1,28 @@
+name: Docker Compose Build and Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Build Docker Image
+      run: docker build -t rayensaaadallah/backend:latest .
+
+    - name: Docker Compose Up
+      run: docker-compose up -d
+
+    - name: Push Docker Image
+      env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      run: |
+        docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
+        docker push rayensaaadallah/backend:latest
