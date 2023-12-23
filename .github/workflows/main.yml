@@ -9,6 +9,10 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        maven: [3.6.3] 
+        
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
