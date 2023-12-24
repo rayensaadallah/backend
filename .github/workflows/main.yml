@@ -11,8 +11,20 @@ jobs:
 
     strategy:
       matrix:
-        java: [11]  # Adjust as needed
+        java: [17]  # Adjust as needed
         maven: [3.6.3]
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
 
     steps:
     - name: Checkout Repository
@@ -25,11 +37,13 @@ jobs:
         java-version: ${{ matrix.java }}
         maven-version: ${{ matrix.maven }}
 
-    - name: Build Docker Image
-      run: docker build -t rayensaaadallah/backend:latest .
 
-    - name: Docker Compose Up
-      run: docker-compose up -d
+    - name: maven
+      run: mvn clean install
+
+    - name: Build Docker Image
+      run: docker run -d --name app_api -p 8089:8089 rayensaaadallah/backend:latest
+
 
     - name: Push Docker Image
       env:
