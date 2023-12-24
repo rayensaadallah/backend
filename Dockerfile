@@ -1,15 +1,12 @@
-
-# Use the official OpenJDK 11 base image for the runtime stage
-FROM openjdk:17-jdk-slim
-
-# Set the working directory inside the container
+# Builder stage
+FROM maven:3.6.3-openjdk-17 as builder
 WORKDIR /app
+COPY . /app
+RUN mvn clean install
 
-# Copy the JAR file from the builder stage to the runtime image
-COPY --from=builder /app/target/backend.jar .
-
-# Expose the port that the application will run on
+# Runtime stage
+FROM openjdk:17
+WORKDIR /app
+COPY --from=builder /app/target/backend-0.0.1-SNAPSHOT.jar .
 EXPOSE 8089
-
-# Specify the command to run on container startup
-CMD ["java", "-jar", "backend.jar"]
+CMD ["java", "-jar", "backend-0.0.1-SNAPSHOT.jar"]
