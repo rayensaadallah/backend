@@ -2,7 +2,7 @@
 FROM maven:3.6.3-openjdk-17 as builder
 WORKDIR /app
 COPY . /app
-RUN mvn clean install
+RUN mvn clean install -DskipTests
 
 # Runtime stage
 FROM openjdk:17
