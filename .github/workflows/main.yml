@@ -42,4 +42,6 @@ jobs:
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
           docker build -t rayensaaadallah/backend:latest .
+          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
           docker push rayensaaadallah/backend:latest
+
