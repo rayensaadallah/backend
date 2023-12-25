@@ -8,6 +8,9 @@ on:
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
+    env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
     strategy:
       matrix:
@@ -44,4 +47,3 @@ jobs:
           docker build -t rayensaaadallah/backend:latest .
           docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
           docker push rayensaaadallah/backend:latest
-
