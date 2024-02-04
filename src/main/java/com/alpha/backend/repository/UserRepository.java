@@ -1,20 +1,17 @@
 package com.alpha.backend.repository;
 
+
+import com.alpha.backend.entity.ApplicationUser;
+import com.alpha.backend.entity.Role;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.List;
 import java.util.Optional;
 
-import com.alpha.backend.models.ApplicationUser;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-
-@Repository
 public interface UserRepository extends JpaRepository<ApplicationUser, Integer> {
-	Optional<ApplicationUser> findByUsername(String username);
-	ApplicationUser getByUsername(String username);
 
-	boolean existsByUsername(String email);
-	List<ApplicationUser> findByAuthorities_Authority(String roleName);
+  Optional<ApplicationUser> findByEmail(String email);
 
-	ApplicationUser getByEmail(String s);
+  List<ApplicationUser> findByRole(String role);
+
 }

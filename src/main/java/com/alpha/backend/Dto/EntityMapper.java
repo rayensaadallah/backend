@@ -1,4 +1,4 @@
-package com.alpha.backend.Dtos;
+package com.alpha.backend.Dto;
 
 
 import org.springframework.beans.BeanUtils;
