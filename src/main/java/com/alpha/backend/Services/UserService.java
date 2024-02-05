@@ -49,7 +49,7 @@ public class UserService {
         user.setRole(Role.ADMIN);
         userRepository.save(user);
     }
-    public List<UserDto> getAllUsersByRoles(String role) {
+    public List<UserDto> getAllUsersByRoles(Role role) {
         List<ApplicationUser> usersWithUserRole = userRepository.findByRole(role);
 
         List<UserDto> userDtos = new ArrayList<>();

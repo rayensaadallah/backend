@@ -3,6 +3,7 @@ package com.alpha.backend.Controller;
 
 import com.alpha.backend.Dto.UserDto;
 import com.alpha.backend.Services.UserService;
+import com.alpha.backend.entity.Role;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class UserController {
     @GetMapping("/list-user")
     @PreAuthorize("hasAnyRole('USER')")
     public List<UserDto> getusers() {
-        return userService.getAllUsersByRoles("USER");
+        return userService.getAllUsersByRoles(Role.USER);
     }
 
     @GetMapping("/info")

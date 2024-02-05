@@ -2,6 +2,7 @@ package com.alpha.backend.Controller;
 
 import com.alpha.backend.Dto.UserDto;
 import com.alpha.backend.Services.UserService;
+import com.alpha.backend.entity.Role;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,12 +19,12 @@ public class AdminController {
     @GetMapping("/list-user")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public List<UserDto> getusers() {
-        return userService.getAllUsersByRoles("USER");
+        return userService.getAllUsersByRoles(Role.USER);
     }
     @GetMapping("/list-admin")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public List<UserDto> getAdmins() {
-        List<UserDto> list = userService.getAllUsersByRoles("ADMIN");
+        List<UserDto> list = userService.getAllUsersByRoles(Role.ADMIN);
         return list;
     }
     @PutMapping("/upgrade/{email}")
