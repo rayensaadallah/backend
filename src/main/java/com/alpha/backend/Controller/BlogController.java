@@ -28,7 +28,7 @@ public class BlogController {
         return blogServices.getAllBlogs();
     }
 
-    @PutMapping("/add")
+    @PostMapping("/add")
     public ResponseEntity<BlogDto> addblog(
             @RequestParam(name = "title") String title,
             @RequestParam(name = "description") String description,
@@ -37,9 +37,7 @@ public class BlogController {
         BlogDto blogDto= new BlogDto();
         blogDto.setDescription(description);
         blogDto.setTitle(title);
-        if (image != null && !image.isEmpty()) {
-            blogDto.setImages(Collections.singletonList(image.getBytes()));
-        }
+        blogDto.setImages(Collections.singletonList(image.getBytes()));
         BlogDto savedBlog = blogServices.addBlog(blogDto);
         return new ResponseEntity<>(savedBlog, HttpStatus.CREATED);
     }

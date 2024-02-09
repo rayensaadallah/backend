@@ -1,5 +1,6 @@
 package com.alpha.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
@@ -39,15 +40,21 @@ public class ApplicationUser implements UserDetails {
   private String secret;
   private String phoneNumber;
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private List<Blog> blogs;
-
   @Lob
   @Column(length = 1048576)
   private byte[] image;
 
   @Enumerated(EnumType.STRING)
   private Role role;
+
+  @OneToMany(mappedBy = "user")
+  @JsonIgnore
+  private List<Blog> blogs;
+
+
+
+
+
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

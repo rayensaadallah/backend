@@ -3,7 +3,6 @@ package com.alpha.backend.Controller;
 import com.alpha.backend.Dto.UserDto;
 import com.alpha.backend.Services.UserService;
 import com.alpha.backend.entity.Role;
-import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

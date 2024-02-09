@@ -25,7 +25,7 @@ public class Blog {
     @Column(length = 1000)
     private String description;
     private Date timeAdded;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonIgnore
     private ApplicationUser user;
 

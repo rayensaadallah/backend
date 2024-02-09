@@ -38,11 +38,11 @@ public class BlogServices {
 
     public BlogDto addBlog(BlogDto blogDto) {
         Blog blogEntity = blogEntityMapper.fromDTO(blogDto, Blog.class);
-        blogEntity.setUser(blogDto.getUser()); // twali te5ou el user mel token
+        blogEntity.setUser(userEntityMapper.fromDTO(userService.getUserByToken(),ApplicationUser.class));
         Date currentTime = new Date();
         blogEntity.setTimeAdded(currentTime);
-        Blog savedBlog = blogRepository.save(blogEntity);
-        return blogEntityMapper.fromBasic(savedBlog, BlogDto.class);
+        blogRepository.save(blogEntity);
+        return blogEntityMapper.fromBasic(blogEntity, BlogDto.class);
     }
     public BlogDto getBlogInfo(Integer id) {
         Optional<Blog> blogOptional = blogRepository.findById(id);

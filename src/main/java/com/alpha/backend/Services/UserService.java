@@ -51,7 +51,6 @@ public class UserService {
     }
     public List<UserDto> getAllUsersByRoles(Role role) {
         List<ApplicationUser> usersWithUserRole = userRepository.findByRole(role);
-
         List<UserDto> userDtos = new ArrayList<>();
         for (ApplicationUser user : usersWithUserRole) {
             userDtos.add(mapper.fromBasic(user, UserDto.class));
